@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f5b57">
+  <title>巴厘岛与科莫多行程中控台</title>
+  <style>
+    :root {
+      --ink: #132b2a;
+      --muted: #617371;
+      --line: #dde7e4;
+      --paper: #fbfaf5;
+      --panel: #ffffff;
+      --green: #0f5b57;
+      --green-2: #2f7d73;
+      --gold: #b98222;
+      --coral: #c85b3d;
+      --blue: #286f96;
+      --shadow: 0 14px 34px rgba(18, 48, 45, 0.12);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 16% 4%, rgba(47, 125, 115, 0.18), transparent 28rem),
+        linear-gradient(180deg, #f1efe5 0%, #fbfaf5 38%, #eef6f3 100%);
+      min-height: 100vh;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .app {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 18px 16px 96px;
+    }
+
+    .hero {
+      padding: 22px 0 16px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    h1 {
+      margin: 10px 0 8px;
+      font-size: 32px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin: 0 -16px;
+      padding: 10px 16px 12px;
+      background: rgba(251, 250, 245, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(221, 231, 228, 0.8);
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .tab {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--muted);
+      min-height: 42px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin: 16px 0 12px;
+    }
+
+    .metric {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      box-shadow: 0 8px 22px rgba(18, 48, 45, 0.06);
+    }
+
+    .metric b {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .section-title {
+      margin: 24px 0 12px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .section-title small {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+    }
+
+    .day-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .day-head {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      display: grid;
+      grid-template-columns: 64px 1fr 28px;
+      gap: 12px;
+      align-items: center;
+      padding: 14px;
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .date-badge {
+      width: 54px;
+      height: 54px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: #eaf3f0;
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    .date-badge.gold { background: #f5ead3; color: var(--gold); }
+    .date-badge.blue { background: #e7f1f7; color: var(--blue); }
+
+    .day-title {
+      min-width: 0;
+    }
+
+    .day-title h2 {
+      margin: 0 0 4px;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    .day-title p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .chevron {
+      color: var(--green);
+      font-size: 22px;
+      transform: rotate(0deg);
+      transition: transform 0.2s ease;
+    }
+
+    .day-card.open .chevron {
+      transform: rotate(90deg);
+    }
+
+    .day-body {
+      display: none;
+      padding: 0 14px 16px 90px;
+    }
+
+    .day-card.open .day-body {
+      display: block;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 12px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      border-radius: 999px;
+      padding: 5px 10px;
+      background: #edf5f3;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .chip.warn {
+      background: #fff0e9;
+      color: var(--coral);
+    }
+
+    .detail-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .detail-list li {
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .detail-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--green-2);
+    }
+
+    .panel-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .info-panel {
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: 0 10px 24px rgba(18, 48, 45, 0.08);
+    }
+
+    .info-panel h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .info-panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--green);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .notice {
+      border-left: 4px solid var(--coral);
+      background: #fff7f3;
+      padding: 12px 14px;
+      border-radius: 8px;
+      color: #7a3a2d;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.94);
+      border-top: 1px solid var(--line);
+      backdrop-filter: blur(18px);
+      padding: 8px 12px max(8px, env(safe-area-inset-bottom));
+    }
+
+    .bottom-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .nav-link {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      min-height: 44px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .nav-link.active {
+      color: var(--green);
+    }
+
+    .view {
+      display: none;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    @media (max-width: 680px) {
+      .app {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .quick-grid,
+      .panel-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .toolbar {
+        margin-left: -14px;
+        margin-right: -14px;
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .tabs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .day-head {
+        grid-template-columns: 56px 1fr 24px;
+        gap: 10px;
+        padding: 12px;
+      }
+
+      .date-badge {
+        width: 48px;
+        height: 48px;
+      }
+
+      .day-body {
+        padding: 0 12px 14px 78px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="hero" id="top">
+      <div class="eyebrow"><span class="dot"></span> 微信内浏览版</div>
+      <h1>巴厘岛与科莫多行程中控台</h1>
+      <p class="subtitle">按天管理活动、交通、车型和安全提醒。当前版本先覆盖已确认信息，未确认内容保留为待定项。</p>
+    </section>
+
+    <nav class="toolbar" aria-label="行程筛选">
+      <div class="tabs">
+        <button class="tab active" data-filter="all">全部</button>
+        <button class="tab" data-filter="bali">巴厘岛</button>
+        <button class="tab" data-filter="komodo">科莫多</button>
+        <button class="tab" data-filter="warning">重点提醒</button>
+      </div>
+    </nav>
+
+    <section class="quick-grid" aria-label="行程概览">
+      <div class="metric"><b>同行 5 人</b><span>按 同行 5 人管理车辆和转场。</span></div>
+      <div class="metric"><b>2-3 箱</b><span>大件行李日优先 Innova Reborn 或 HiAce。</span></div>
+      <div class="metric"><b>2 天潜水</b><span>7/16-7/17 潜水成员参加科莫多潜水。</span></div>
+    </section>
+
+    <section class="view active" id="view-itinerary">
+      <div class="section-title">
+        <span>每日行程</span>
+        <small>点击卡片展开</small>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <section class="view" id="view-transport">
+      <div class="section-title"><span>交通与车型</span></div>
+      <div class="panel-grid">
+        <article class="info-panel">
+          <h3>巴厘岛陆地包车</h3>
+          <p>同行 5 人加 2-3 个大箱，首选 Innova Reborn。同日带全部行李或长时间坐车，升到 HiAce 更稳。</p>
+        </article>
+        <article class="info-panel">
+          <h3>科莫多交通</h3>
+          <p>科莫多核心玩法靠船。陆地短途用酒店接送、码头接送或带司机包车，不建议自驾租车。</p>
+        </article>
+        <article class="info-panel">
+          <h3>Avanza / Sienta</h3>
+          <p>适合短途和行李少的情况。同行 5 人加 3 个大箱时空间不如 Innova Reborn 稳妥。</p>
+        </article>
+        <article class="info-panel">
+          <h3>当天确认</h3>
+          <p>出发前一晚确认司机、接送时间、行李数量、码头或潜店集合点。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="view" id="view-alerts">
+      <div class="section-title"><span>重点提醒</span></div>
+      <div class="notice">
+        潜水成员 7/16-7/17 连续潜水。7/18 一日游不展开景点明细，但需要避免过度赶路、强体力安排，以及潜水后太快进入高海拔环境。最终以潜店给出的安全间隔为准。
+      </div>
+      <div class="panel-grid" style="margin-top: 12px;">
+        <article class="info-panel">
+          <h3>出海日</h3>
+          <p>优先看天气、船况、救生设备、取消规则。行程前一晚确认集合点和早餐时间。</p>
+        </article>
+        <article class="info-panel">
+          <h3>行李日</h3>
+          <p>带大件行李转场时，不要只看座位数。要确认 同行 5 人和 2-3 个大箱能同时放下。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="view" id="view-links">
+      <div class="section-title"><span>常用入口</span></div>
+      <div class="panel-grid">
+        <article class="info-panel">
+          <h3>地图</h3>
+          <p>先保留通用入口，后续可替换成酒店、码头、潜店和景点的具体地图链接。</p>
+          <div class="action-row">
+            <a class="action" href="https://maps.google.com/?q=Labuan%20Bajo">Labuan Bajo</a>
+            <a class="action" href="https://maps.google.com/?q=Ubud%20Bali">Ubud</a>
+            <a class="action" href="https://maps.google.com/?q=Sanur%20Harbour%20Bali">Sanur Harbour</a>
+          </div>
+        </article>
+        <article class="info-panel">
+          <h3>联系人</h3>
+          <p>司机、潜店、船公司、酒店联系人暂未录入。拿到订单后可直接补到这里。</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="底部导航">
+    <div class="bottom-inner">
+      <button class="nav-link active" data-view="view-itinerary">行程</button>
+      <button class="nav-link" data-view="view-transport">交通</button>
+      <button class="nav-link" data-view="view-alerts">提醒</button>
+      <button class="nav-link" data-view="view-links">入口</button>
+    </div>
+  </nav>
+
+  <script>
+    const days = [
+      {
+        date: "7/10",
+        week: "周五",
+        title: "海神庙，转场乌布",
+        area: "bali",
+        tone: "gold",
+        summary: "巴厘岛西南侧到乌布，适合安排上门接送包车。",
+        chips: ["巴厘岛", "包车", "Innova Reborn"],
+        details: [
+          "海神庙 Tanah Lot 后转场乌布。",
+          "同行 5 人加大箱，优先 Innova Reborn；如当天带 3 个超大箱可看 HiAce。",
+          "乌布路窄且容易堵，司机熟路比自驾更重要。"
+        ]
+      },
+      {
+        date: "7/11",
+        week: "周六",
+        title: "乌布周边游览",
+        area: "bali",
+        tone: "green",
+        summary: "乌布周边景点密集，包车按同方向串联。",
+        chips: ["巴厘岛", "乌布", "轻装"],
+        details: [
+          "梯田、圣泉庙、象窟、石窟、瀑布等按路线顺序串联。",
+          "当天尽量不带大行李，Innova Reborn 坐感更好。",
+          "午后容易堵，晚餐地点不要排得离酒店太远。"
+        ]
+      },
+      {
+        date: "7/12",
+        week: "周日",
+        title: "转住蓝梦岛",
+        area: "bali",
+        tone: "blue",
+        summary: "乌布到沙努尔码头，再乘快艇上岛。",
+        chips: ["码头", "快艇", "行李日"],
+        details: [
+          "重点确认酒店出发时间、码头、船班和行李限制。",
+          "带箱转场时，车辆空间比价格更重要。",
+          "快艇前后预留缓冲，不压到最后一班。"
+        ]
+      },
+      {
+        date: "7/16",
+        week: "周四",
+        title: "科莫多，潜水成员潜水",
+        area: "komodo",
+        tone: "blue",
+        summary: "潜点由潜店安排，其他人活动待定。",
+        chips: ["科莫多", "潜水成员潜水", "其他人待定"],
+        details: [
+          "潜水成员参加潜水，潜点和出海安排由潜店确认。",
+          "其他人建议安排 Labuan Bajo 镇上轻松活动、酒店休整或日落。",
+          "不用按巴厘岛方式租车，优先使用酒店接送和船公司接送。"
+        ]
+      },
+      {
+        date: "7/17",
+        week: "周五",
+        title: "科莫多，潜水成员继续潜水",
+        area: "komodo",
+        tone: "blue",
+        summary: "连续潜水第二天，其他人继续机动安排。",
+        chips: ["科莫多", "连续潜水", "安全间隔"],
+        warning: true,
+        details: [
+          "潜水成员继续潜水，具体潜点不在总行程里展开。",
+          "记录最后一潜结束时间，用于管理 7/18 的强度和海拔风险。",
+          "其他人活动保持轻松，不安排必须跨很远的陆地行程。"
+        ]
+      },
+      {
+        date: "7/18",
+        week: "周六",
+        title: "科莫多全天一日游",
+        area: "komodo",
+        tone: "gold",
+        summary: "6 景点一日游，不展开明细，按全员集合日管理。",
+        chips: ["一日游", "6 景点", "全员集合"],
+        warning: true,
+        details: [
+          "不在页面内写 6 景点明细，按订单实际安排执行。",
+          "前一晚确认接送时间、集合点、船或车、餐食和取消规则。",
+          "潜水成员前两天潜水，今天避免过度赶路和强体力安排。"
+        ]
+      }
+    ];
+
+    const timeline = document.querySelector("#timeline");
+    const toneClass = { gold: "gold", blue: "blue", green: "" };
+
+    function render(filter = "all") {
+      timeline.innerHTML = "";
+      const visibleDays = days.filter((day) => {
+        if (filter === "all") return true;
+        if (filter === "warning") return day.warning;
+        return day.area === filter;
+      });
+
+      visibleDays.forEach((day, index) => {
+        const card = document.createElement("article");
+        card.className = `day-card ${index === 0 ? "open" : ""}`;
+        card.innerHTML = `
+          <button class="day-head" type="button" aria-expanded="${index === 0 ? "true" : "false"}">
+            <div class="date-badge ${toneClass[day.tone] || ""}">
+              <div>
+                <div>${day.date}</div>
+                <small>${day.week}</small>
+              </div>
+            </div>
+            <div class="day-title">
+              <h2>${day.title}</h2>
+              <p>${day.summary}</p>
+            </div>
+            <div class="chevron">›</div>
+          </button>
+          <div class="day-body">
+            <div class="chips">
+              ${day.chips.map((chip) => `<span class="chip ${day.warning && chip.includes("安全") ? "warn" : ""}">${chip}</span>`).join("")}
+            </div>
+            <ul class="detail-list">
+              ${day.details.map((item) => `<li>${item}</li>`).join("")}
+            </ul>
+          </div>
+        `;
+        card.querySelector(".day-head").addEventListener("click", () => {
+          const isOpen = card.classList.toggle("open");
+          card.querySelector(".day-head").setAttribute("aria-expanded", String(isOpen));
+        });
+        timeline.appendChild(card);
+      });
+    }
+
+    document.querySelectorAll(".tab").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach((item) => item.classList.remove("active"));
+        tab.classList.add("active");
+        render(tab.dataset.filter);
+      });
+    });
+
+    document.querySelectorAll(".nav-link").forEach((link) => {
+      link.addEventListener("click", () => {
+        document.querySelectorAll(".nav-link").forEach((item) => item.classList.remove("active"));
+        document.querySelectorAll(".view").forEach((item) => item.classList.remove("active"));
+        link.classList.add("active");
+        document.querySelector(`#${link.dataset.view}`).classList.add("active");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    });
+
+    render();
+  </script>
+</body>
+</html>
