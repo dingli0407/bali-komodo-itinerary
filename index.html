@@ -543,20 +543,20 @@
   <script>
     const segmentSummaries = {
       all: {
-        title: "全部行程：巴厘岛 → 蓝梦岛 → 科莫多",
-        note: "每天都保留一张卡片。航班号、船班和具体时间还没拿到的地方，先用“待补”占位，后续拿到订单后直接替换。",
-        from: "出发城市/航班待补",
-        to: "科莫多 Labuan Bajo / 后续去向待补",
-        mode: "航班 + 包车 + 快艇 + 科莫多出海",
-        schedule: "国际/印尼国内航班、快艇船班、接送时间待补"
+        title: "全部行程：杭州 → 巴厘岛 → 蓝梦岛 → 科莫多 → 杭州",
+        note: "已从携程录屏补入航班、接机和酒店。乘客姓名、订单号、车牌等隐私信息不放到公开页面。",
+        from: "杭州萧山 T4",
+        to: "杭州萧山 T4",
+        mode: "航班 + 接机 + 包车 + 快艇/岛上交通 + 科莫多出海",
+        schedule: "7/8 CZ3864/CZ625 去程；7/19 QZ645/SQ939/SQ838 返程；7/15 去科莫多交通待补"
       },
       bali: {
         title: "巴厘岛段",
-        note: "覆盖抵达、缓冲、海神庙转乌布、乌布周边，最后到沙努尔码头衔接蓝梦岛。",
-        from: "出发城市 / 巴厘岛 DPS 机场待补",
-        to: "乌布酒店 / 沙努尔码头",
+        note: "覆盖杭州出发、广州转机抵达巴厘岛、接机、AYANA 休整、海神庙转乌布和乌布周边。",
+        from: "杭州萧山 T4",
+        to: "Impiana Private Villas Ubud / 沙努尔码头",
         mode: "航班 + 机场接送 + 上门包车",
-        schedule: "航班号、抵达时间、每日上门接车时间待补"
+        schedule: "CZ3864 13:35-16:00；CZ625 18:30-23:40；7/9 00:25 接机"
       },
       lembongan: {
         title: "蓝梦岛段",
@@ -568,11 +568,11 @@
       },
       komodo: {
         title: "科莫多段",
-        note: "科莫多以 Labuan Bajo 为基地，潜水和一日游按船方/潜店实际安排执行。",
-        from: "巴厘岛/蓝梦岛方向，具体衔接待补",
-        to: "Labuan Bajo 酒店 / 科莫多出海集合点",
-        mode: "快艇/接送 + 印尼国内航班 + 船",
-        schedule: "DPS-LBJ 航班号、起降时间、潜店集合时间待补"
+        note: "科莫多以 Labuan Bajo 为基地。酒店和返程航班已补入，7/15 抵达科莫多的具体交通仍待补。",
+        from: "蓝梦岛/巴厘岛方向（7/15 交通待补）",
+        to: "杭州萧山 T4",
+        mode: "转场交通 + 科莫多出海 + QZ645/SQ939/SQ838 返程",
+        schedule: "7/15 转场待补；7/19 08:40-22:50 返程"
       }
     };
 
@@ -583,38 +583,38 @@
         title: "出发，抵达巴厘岛",
         area: "bali",
         tone: "green",
-        summary: "航班号和抵达时间待补，抵达后以入住和休整为主。",
-        chips: ["巴厘岛", "抵达日", "待补航班"],
+        summary: "杭州经广州飞巴厘岛，23:40 抵达。",
+        chips: ["巴厘岛", "CZ3864", "CZ625"],
         transfer: {
-          from: "出发城市（待补）",
-          to: "巴厘岛 DPS 机场 / 酒店（待补）",
-          mode: "航班 + 机场接送",
-          schedule: "航班号、起飞时间、抵达时间待补"
+          from: "杭州萧山 T4",
+          to: "巴厘岛伍拉赖国际机场",
+          mode: "南方航空 CZ3864 + 南方航空 CZ625",
+          schedule: "13:35 杭州萧山 T4 → 16:00 广州白云 T2；18:30 广州白云 T2 → 23:40 巴厘岛"
         },
         details: [
-          "先补齐国际或印尼国内到达巴厘岛的航班号和时间。",
-          "落地后建议只安排入住、换汇/电话卡、附近吃饭，不排硬景点。",
-          "酒店地址确认后，可以把地图入口补到常用入口。"
+          "第一段 CZ3864：杭州萧山 T4 13:35 起飞，广州白云 T2 16:00 抵达。",
+          "第二段 CZ625：广州白云 T2 18:30 起飞，巴厘岛 23:40 抵达。",
+          "抵达后衔接 7/9 凌晨接机，不再安排其他活动。"
         ]
       },
       {
         date: "7/9",
         week: "周四",
-        title: "巴厘岛缓冲日",
+        title: "巴厘岛接机，AYANA 休整",
         area: "bali",
         tone: "green",
-        summary: "作为抵达后的缓冲和机动日，具体活动待补。",
-        chips: ["巴厘岛", "机动", "待补"],
+        summary: "凌晨接机到 AYANA Resort Bali，白天以休整为主。",
+        chips: ["巴厘岛", "接机", "AYANA"],
         transfer: {
-          from: "巴厘岛酒店（待补）",
-          to: "巴厘岛酒店（待补）",
-          mode: "市内短途 / 酒店接送 / 机动包车",
-          schedule: "如有活动，补上出发和返回时间"
+          from: "巴厘岛伍拉赖国际机场",
+          to: "AYANA Resort Bali",
+          mode: "携程接机，7座小巴",
+          schedule: "00:25 用车"
         },
         details: [
-          "如果前一晚抵达较晚，这天适合轻松安排。",
-          "如要新增景点，优先放在同一区域，避免一早跨岛赶路。",
-          "晚上确认 7/10 上门接车时间和行李装载。"
+          "接机信息来自携程录屏，车牌和司机信息不放公开页面。",
+          "白天建议作为倒时差和酒店休整日。",
+          "晚上确认 7/10 包车接车时间和行李装载。"
         ]
       },
       {
@@ -623,16 +623,17 @@
         title: "海神庙，转场乌布",
         area: "bali",
         tone: "gold",
-        summary: "巴厘岛西南侧到乌布，适合安排上门接送包车。",
+        summary: "从 AYANA 方向游览海神庙后转场乌布，入住 Impiana。",
         chips: ["巴厘岛", "包车", "Innova Reborn"],
         transfer: {
-          from: "巴厘岛酒店（待补）/ 海神庙 Tanah Lot",
-          to: "乌布酒店（待补）",
+          from: "AYANA Resort Bali / 海神庙 Tanah Lot",
+          to: "Impiana Private Villas Ubud",
           mode: "上门包车",
           schedule: "接车时间、游览时长、抵达乌布时间待补"
         },
         details: [
           "海神庙 Tanah Lot 后转场乌布。",
+          "酒店：Impiana Private Villas Ubud，7/10 入住，7/12 离店。",
           "满员带大件行李时，优先 Innova Reborn；如果行李特别多可看 HiAce。",
           "乌布路窄且容易堵，司机熟路比自驾更重要。"
         ]
@@ -646,8 +647,8 @@
         summary: "乌布周边景点密集，包车按同方向串联。",
         chips: ["巴厘岛", "乌布", "轻装"],
         transfer: {
-          from: "乌布酒店",
-          to: "乌布酒店",
+          from: "Impiana Private Villas Ubud",
+          to: "Impiana Private Villas Ubud",
           mode: "上门包车",
           schedule: "出发时间、返程时间待补"
         },
@@ -666,12 +667,13 @@
         summary: "乌布到沙努尔码头，再乘快艇上岛，蓝梦岛段单独管理。",
         chips: ["蓝梦岛", "码头", "快艇", "行李日"],
         transfer: {
-          from: "乌布酒店",
-          to: "蓝梦岛酒店（待补）",
+          from: "Impiana Private Villas Ubud",
+          to: "Mahagiri Resort Nusa Lembongan",
           mode: "包车到沙努尔码头 + 快艇 + 岛上接送",
           schedule: "酒店出发时间、船公司、船班、抵达时间待补"
         },
         details: [
+          "酒店：Mahagiri Resort Nusa Lembongan，7/12 入住，7/15 离店。",
           "重点确认酒店出发时间、码头、船班和行李限制。",
           "带箱转场时，车辆空间比价格更重要。",
           "快艇前后预留缓冲，不压到最后一班。"
@@ -686,8 +688,8 @@
         summary: "蓝梦岛全天，具体海滩、浮潜或岛上路线待补。",
         chips: ["蓝梦岛", "岛上", "待补"],
         transfer: {
-          from: "蓝梦岛酒店",
-          to: "蓝梦岛酒店",
+          from: "Mahagiri Resort Nusa Lembongan",
+          to: "Mahagiri Resort Nusa Lembongan",
           mode: "岛上接送 / 电瓶车 / 船方安排",
           schedule: "活动集合和返回时间待补"
         },
@@ -706,8 +708,8 @@
         summary: "保留为蓝梦岛第二个完整日，具体活动待补。",
         chips: ["蓝梦岛", "机动", "待补"],
         transfer: {
-          from: "蓝梦岛酒店",
-          to: "蓝梦岛酒店 / 离岛码头（待确认）",
+          from: "Mahagiri Resort Nusa Lembongan",
+          to: "Mahagiri Resort Nusa Lembongan / 离岛码头（待确认）",
           mode: "岛上接送 / 快艇待确认",
           schedule: "是否离岛、船班和接送时间待补"
         },
@@ -720,20 +722,20 @@
       {
         date: "7/15",
         week: "周三",
-        title: "转场科莫多",
+        title: "转场科莫多，入住 Katamaran",
         area: "komodo",
         tone: "gold",
-        summary: "从蓝梦岛/巴厘岛方向转到 Labuan Bajo，航班和时间待补。",
-        chips: ["科莫多", "转场", "待补航班"],
+        summary: "抵达下拉布安后入住 Katamaran Hotel & Resort Komodo。",
+        chips: ["科莫多", "转场待补", "Katamaran"],
         transfer: {
-          from: "蓝梦岛或巴厘岛酒店（待确认）",
-          to: "Labuan Bajo 酒店（待补）",
+          from: "蓝梦岛或巴厘岛方向（待确认）",
+          to: "Katamaran Hotel & Resort Komodo",
           mode: "快艇/接送 + DPS-LBJ 国内航班 + 酒店接送",
           schedule: "离岛船班、DPS-LBJ 航班号、起降时间待补"
         },
         details: [
-          "科莫多段通常需要飞到 Labuan Bajo，具体航班号和时间必须补齐。",
-          "如果从蓝梦岛出发，要把快艇到沙努尔、去机场、飞科莫多三段时间串起来。",
+          "酒店：Katamaran Hotel & Resort Komodo，7/15 入住，7/19 离店。",
+          "录屏中已看到酒店订单，但 7/15 去 Labuan Bajo 的航班/船班细节还没看到。",
           "抵达后不建议安排硬活动，优先确认潜店或次日集合点。"
         ]
       },
@@ -746,8 +748,8 @@
         summary: "潜点由潜店安排，其他人活动待定。",
         chips: ["科莫多", "潜水成员潜水", "其他人待定"],
         transfer: {
-          from: "Labuan Bajo 酒店",
-          to: "潜店/码头集合点 / Labuan Bajo 酒店",
+          from: "Katamaran Hotel & Resort Komodo",
+          to: "潜店/码头集合点 / Katamaran Hotel & Resort Komodo",
           mode: "潜店接送 / 出海船",
           schedule: "集合时间、出海时间、返程时间由潜店待补"
         },
@@ -767,8 +769,8 @@
         chips: ["科莫多", "连续潜水", "安全间隔"],
         warning: true,
         transfer: {
-          from: "Labuan Bajo 酒店",
-          to: "潜店/码头集合点 / Labuan Bajo 酒店",
+          from: "Katamaran Hotel & Resort Komodo",
+          to: "潜店/码头集合点 / Katamaran Hotel & Resort Komodo",
           mode: "潜店接送 / 出海船",
           schedule: "集合时间、最后一潜结束时间待补"
         },
@@ -788,8 +790,8 @@
         chips: ["一日游", "6 景点", "全员集合"],
         warning: true,
         transfer: {
-          from: "Labuan Bajo 酒店",
-          to: "6 景点一日游集合点 / Labuan Bajo 酒店",
+          from: "Katamaran Hotel & Resort Komodo",
+          to: "6 景点一日游集合点 / Katamaran Hotel & Resort Komodo",
           mode: "一日游车辆/船只，按订单执行",
           schedule: "接送时间、出海/返程时间待补"
         },
@@ -797,6 +799,26 @@
           "不在页面内写 6 景点明细，按订单实际安排执行。",
           "前一晚确认接送时间、集合点、船或车、餐食和取消规则。",
           "潜水成员前两天潜水，今天避免过度赶路和强体力安排。"
+        ]
+      },
+      {
+        date: "7/19",
+        week: "周日",
+        title: "返程回杭州",
+        area: "komodo",
+        tone: "green",
+        summary: "下拉布安经巴厘岛、新加坡转机，晚上抵达杭州。",
+        chips: ["返程", "QZ645", "SQ939", "SQ838"],
+        transfer: {
+          from: "Katamaran Hotel & Resort Komodo / 下拉布安科莫多机场",
+          to: "杭州萧山 T4",
+          mode: "印尼亚航 QZ645 + 新加坡航空 SQ939 + 新加坡航空 SQ838",
+          schedule: "08:40 下拉布安科莫多 → 09:50 巴厘岛；13:15 巴厘岛 → 16:00 新加坡 T3；17:40 新加坡 T3 → 22:50 杭州萧山 T4"
+        },
+        details: [
+          "QZ645：08:40 下拉布安科莫多出发，09:50 抵达巴厘岛。",
+          "SQ939：13:15 巴厘岛出发，16:00 抵达新加坡樟宜 T3。",
+          "SQ838：17:40 新加坡樟宜 T3 出发，22:50 抵达杭州萧山 T4。"
         ]
       }
     ];
