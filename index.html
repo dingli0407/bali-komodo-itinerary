@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0f5b57">
-  <title>巴厘岛与科莫多行程中控台</title>
+  <title>巴厘岛、蓝梦岛与科莫多行程中控台</title>
   <style>
     :root {
       --ink: #132b2a;
@@ -92,7 +92,7 @@
 
     .tabs {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 8px;
     }
 
@@ -430,14 +430,15 @@
   <main class="app">
     <section class="hero" id="top">
       <div class="eyebrow"><span class="dot"></span> 微信内浏览版</div>
-      <h1>巴厘岛与科莫多行程中控台</h1>
-      <p class="subtitle">按天管理活动、交通、车型和安全提醒。当前版本先覆盖已确认信息，未确认内容保留为待定项。</p>
+      <h1>巴厘岛、蓝梦岛与科莫多行程中控台</h1>
+      <p class="subtitle">按巴厘岛、蓝梦岛、科莫多三段管理活动、交通、车型和安全提醒。当前版本先覆盖已确认信息，未确认内容保留为待定项。</p>
     </section>
 
     <nav class="toolbar" aria-label="行程筛选">
       <div class="tabs">
         <button class="tab active" data-filter="all">全部</button>
         <button class="tab" data-filter="bali">巴厘岛</button>
+        <button class="tab" data-filter="lembongan">蓝梦岛</button>
         <button class="tab" data-filter="komodo">科莫多</button>
         <button class="tab" data-filter="warning">重点提醒</button>
       </div>
@@ -445,7 +446,7 @@
 
     <section class="quick-grid" aria-label="行程概览">
       <div class="metric"><b>同行 5 人</b><span>按 同行 5 人管理车辆和转场。</span></div>
-      <div class="metric"><b>2-3 箱</b><span>大件行李日优先 Innova Reborn 或 HiAce。</span></div>
+      <div class="metric"><b>3 段</b><span>巴厘岛、蓝梦岛、科莫多分开查看。</span></div>
       <div class="metric"><b>2 天潜水</b><span>7/16-7/17 潜水成员参加科莫多潜水。</span></div>
     </section>
 
@@ -463,6 +464,10 @@
         <article class="info-panel">
           <h3>巴厘岛陆地包车</h3>
           <p>同行 5 人加 2-3 个大箱，首选 Innova Reborn。同日带全部行李或长时间坐车，升到 HiAce 更稳。</p>
+        </article>
+        <article class="info-panel">
+          <h3>蓝梦岛转场</h3>
+          <p>重点是乌布到沙努尔码头、快艇船班、上岛后的酒店接送。车辆只管到码头，船和岛上交通单独确认。</p>
         </article>
         <article class="info-panel">
           <h3>科莫多交通</h3>
@@ -559,10 +564,10 @@
         date: "7/12",
         week: "周日",
         title: "转住蓝梦岛",
-        area: "bali",
+        area: "lembongan",
         tone: "blue",
-        summary: "乌布到沙努尔码头，再乘快艇上岛。",
-        chips: ["码头", "快艇", "行李日"],
+        summary: "乌布到沙努尔码头，再乘快艇上岛，蓝梦岛段单独管理。",
+        chips: ["蓝梦岛", "码头", "快艇", "行李日"],
         details: [
           "重点确认酒店出发时间、码头、船班和行李限制。",
           "带箱转场时，车辆空间比价格更重要。",
