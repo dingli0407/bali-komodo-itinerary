@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f5b57">
+  <meta property="og:title" content="巴厘岛、蓝梦岛与科莫多行程">
+  <meta property="og:description" content="微信置顶入口：点击确认打开每日行程。">
+  <title>打开行程</title>
+  <style>
+    :root {
+      --ink: #132b2a;
+      --muted: #617371;
+      --green: #0f5b57;
+      --line: #dde7e4;
+      --paper: #fbfaf5;
+      --gold: #b98222;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(47, 125, 115, 0.18), transparent 18rem),
+        linear-gradient(180deg, #f1efe5 0%, var(--paper) 56%, #eef6f3 100%);
+      display: grid;
+      place-items: center;
+      padding: 24px 16px;
+    }
+
+    main {
+      width: min(100%, 480px);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 18px 42px rgba(18, 48, 45, 0.14);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--gold);
+    }
+
+    h1 {
+      margin: 12px 0 10px;
+      font-size: 28px;
+      line-height: 1.18;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .open-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 54px;
+      margin: 22px 0 12px;
+      border-radius: 12px;
+      background: var(--green);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 12px 24px rgba(15, 91, 87, 0.24);
+    }
+
+    .copy-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      min-height: 42px;
+      padding: 0 10px;
+      color: var(--muted);
+      background: #fff;
+      font: inherit;
+    }
+
+    button {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      min-height: 42px;
+      padding: 0 12px;
+      background: #fff;
+      color: var(--green);
+      font: inherit;
+      font-weight: 800;
+    }
+
+    .hint {
+      margin-top: 12px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow"><span class="dot"></span> 微信置顶入口</div>
+    <h1>打开巴厘岛、蓝梦岛与科莫多行程</h1>
+    <p>如果从微信置顶消息点链接没有反应，先点这个确认按钮。它会在当前微信页面里打开行程，不跳到外部浏览器。</p>
+    <a class="open-button" href="./">打开行程</a>
+    <p class="hint">备用：如果按钮也被微信拦截，可以复制下面链接，发到聊天窗口后再点。</p>
+    <div class="copy-row">
+      <input id="page-url" value="https://dingli0407.github.io/bali-komodo-itinerary/" readonly>
+      <button id="copy-button" type="button">复制</button>
+    </div>
+  </main>
+
+  <script>
+    const copyButton = document.querySelector("#copy-button");
+    const pageUrl = document.querySelector("#page-url");
+
+    copyButton.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(pageUrl.value);
+        copyButton.textContent = "已复制";
+      } catch (error) {
+        pageUrl.select();
+        document.execCommand("copy");
+        copyButton.textContent = "已复制";
+      }
+    });
+  </script>
+</body>
+</html>
