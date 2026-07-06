@@ -92,7 +92,7 @@
 
     .tabs {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 8px;
     }
 
@@ -125,6 +125,57 @@
       color: var(--muted);
       font-size: 12px;
       font-weight: 500;
+    }
+
+    .segment-summary {
+      margin: 16px 0 6px;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: 0 10px 24px rgba(18, 48, 45, 0.08);
+    }
+
+    .segment-summary h2 {
+      margin: 0 0 6px;
+      font-size: 18px;
+    }
+
+    .segment-summary p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .route-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .route-item {
+      border: 1px solid #e5eee9;
+      background: #fbfdfb;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .route-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .route-item b {
+      display: block;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .pending {
+      color: var(--coral);
     }
 
     .timeline {
@@ -256,6 +307,23 @@
       background: var(--green-2);
     }
 
+    .transfer-box {
+      margin: 0 0 12px;
+      border: 1px solid #e6eee9;
+      background: #fbfdfb;
+      border-radius: 8px;
+      padding: 10px;
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .transfer-box b {
+      color: var(--ink);
+    }
+
     .panel-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -304,16 +372,6 @@
       font-weight: 800;
     }
 
-    .notice {
-      border-left: 4px solid var(--coral);
-      background: #fff7f3;
-      padding: 12px 14px;
-      border-radius: 8px;
-      color: #7a3a2d;
-      line-height: 1.6;
-      font-size: 14px;
-    }
-
     .bottom-nav {
       position: fixed;
       left: 0;
@@ -330,7 +388,7 @@
       max-width: 980px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 8px;
     }
 
@@ -370,6 +428,10 @@
         grid-template-columns: 1fr;
       }
 
+      .route-grid {
+        grid-template-columns: 1fr;
+      }
+
       .toolbar {
         margin-left: -14px;
         margin-right: -14px;
@@ -403,7 +465,7 @@
     <section class="hero" id="top">
       <div class="eyebrow"><span class="dot"></span> 微信内浏览版</div>
       <h1>巴厘岛、蓝梦岛与科莫多行程中控台</h1>
-      <p class="subtitle">按巴厘岛、蓝梦岛、科莫多三段管理活动、交通、车型和安全提醒。当前版本先覆盖已确认信息，未确认内容保留为待定项。</p>
+      <p class="subtitle">按巴厘岛、蓝梦岛、科莫多三段管理每日行程、转场交通和待补班次。当前版本先覆盖已确认信息，未确认内容保留为待定项。</p>
     </section>
 
     <nav class="toolbar" aria-label="行程筛选">
@@ -412,11 +474,11 @@
         <button class="tab" data-filter="bali">巴厘岛</button>
         <button class="tab" data-filter="lembongan">蓝梦岛</button>
         <button class="tab" data-filter="komodo">科莫多</button>
-        <button class="tab" data-filter="warning">重点提醒</button>
       </div>
     </nav>
 
     <section class="view active" id="view-itinerary">
+      <section class="segment-summary" id="segment-summary" aria-label="当前分段交通总览"></section>
       <div class="section-title">
         <span>每日行程</span>
         <small>点击卡片展开</small>
@@ -450,19 +512,6 @@
       </div>
     </section>
 
-    <section class="view" id="view-alerts">
-      <div class="section-title"><span>重点提醒</span></div>
-      <div class="notice">
-        7/18 一日游不展开景点明细，但需要避免过度赶路、强体力安排，以及潜水后太快进入高海拔环境。最终以潜店给出的安全间隔为准。
-      </div>
-      <div class="panel-grid" style="margin-top: 12px;">
-        <article class="info-panel">
-          <h3>出海日</h3>
-          <p>优先看天气、船况、救生设备、取消规则。行程前一晚确认集合点和早餐时间。</p>
-        </article>
-      </div>
-    </section>
-
     <section class="view" id="view-links">
       <div class="section-title"><span>常用入口</span></div>
       <div class="panel-grid">
@@ -487,13 +536,87 @@
     <div class="bottom-inner">
       <button class="nav-link active" data-view="view-itinerary">行程</button>
       <button class="nav-link" data-view="view-transport">交通</button>
-      <button class="nav-link" data-view="view-alerts">提醒</button>
       <button class="nav-link" data-view="view-links">入口</button>
     </div>
   </nav>
 
   <script>
+    const segmentSummaries = {
+      all: {
+        title: "全部行程：巴厘岛 → 蓝梦岛 → 科莫多",
+        note: "每天都保留一张卡片。航班号、船班和具体时间还没拿到的地方，先用“待补”占位，后续拿到订单后直接替换。",
+        from: "出发城市/航班待补",
+        to: "科莫多 Labuan Bajo / 后续去向待补",
+        mode: "航班 + 包车 + 快艇 + 科莫多出海",
+        schedule: "国际/印尼国内航班、快艇船班、接送时间待补"
+      },
+      bali: {
+        title: "巴厘岛段",
+        note: "覆盖抵达、缓冲、海神庙转乌布、乌布周边，最后到沙努尔码头衔接蓝梦岛。",
+        from: "出发城市 / 巴厘岛 DPS 机场待补",
+        to: "乌布酒店 / 沙努尔码头",
+        mode: "航班 + 机场接送 + 上门包车",
+        schedule: "航班号、抵达时间、每日上门接车时间待补"
+      },
+      lembongan: {
+        title: "蓝梦岛段",
+        note: "蓝梦岛单独作为海岛段管理，重点是快艇船班、码头接送、岛上活动和离岛衔接。",
+        from: "沙努尔码头",
+        to: "蓝梦岛酒店 / 离岛码头待补",
+        mode: "快艇 + 岛上接送",
+        schedule: "船公司、船班时间、酒店接送时间待补"
+      },
+      komodo: {
+        title: "科莫多段",
+        note: "科莫多以 Labuan Bajo 为基地，潜水和一日游按船方/潜店实际安排执行。",
+        from: "巴厘岛/蓝梦岛方向，具体衔接待补",
+        to: "Labuan Bajo 酒店 / 科莫多出海集合点",
+        mode: "快艇/接送 + 印尼国内航班 + 船",
+        schedule: "DPS-LBJ 航班号、起降时间、潜店集合时间待补"
+      }
+    };
+
     const days = [
+      {
+        date: "7/8",
+        week: "周三",
+        title: "出发，抵达巴厘岛",
+        area: "bali",
+        tone: "green",
+        summary: "航班号和抵达时间待补，抵达后以入住和休整为主。",
+        chips: ["巴厘岛", "抵达日", "待补航班"],
+        transfer: {
+          from: "出发城市（待补）",
+          to: "巴厘岛 DPS 机场 / 酒店（待补）",
+          mode: "航班 + 机场接送",
+          schedule: "航班号、起飞时间、抵达时间待补"
+        },
+        details: [
+          "先补齐国际或印尼国内到达巴厘岛的航班号和时间。",
+          "落地后建议只安排入住、换汇/电话卡、附近吃饭，不排硬景点。",
+          "酒店地址确认后，可以把地图入口补到常用入口。"
+        ]
+      },
+      {
+        date: "7/9",
+        week: "周四",
+        title: "巴厘岛缓冲日",
+        area: "bali",
+        tone: "green",
+        summary: "作为抵达后的缓冲和机动日，具体活动待补。",
+        chips: ["巴厘岛", "机动", "待补"],
+        transfer: {
+          from: "巴厘岛酒店（待补）",
+          to: "巴厘岛酒店（待补）",
+          mode: "市内短途 / 酒店接送 / 机动包车",
+          schedule: "如有活动，补上出发和返回时间"
+        },
+        details: [
+          "如果前一晚抵达较晚，这天适合轻松安排。",
+          "如要新增景点，优先放在同一区域，避免一早跨岛赶路。",
+          "晚上确认 7/10 上门接车时间和行李装载。"
+        ]
+      },
       {
         date: "7/10",
         week: "周五",
@@ -502,6 +625,12 @@
         tone: "gold",
         summary: "巴厘岛西南侧到乌布，适合安排上门接送包车。",
         chips: ["巴厘岛", "包车", "Innova Reborn"],
+        transfer: {
+          from: "巴厘岛酒店（待补）/ 海神庙 Tanah Lot",
+          to: "乌布酒店（待补）",
+          mode: "上门包车",
+          schedule: "接车时间、游览时长、抵达乌布时间待补"
+        },
         details: [
           "海神庙 Tanah Lot 后转场乌布。",
           "满员带大件行李时，优先 Innova Reborn；如果行李特别多可看 HiAce。",
@@ -516,6 +645,12 @@
         tone: "green",
         summary: "乌布周边景点密集，包车按同方向串联。",
         chips: ["巴厘岛", "乌布", "轻装"],
+        transfer: {
+          from: "乌布酒店",
+          to: "乌布酒店",
+          mode: "上门包车",
+          schedule: "出发时间、返程时间待补"
+        },
         details: [
           "梯田、圣泉庙、象窟、石窟、瀑布等按路线顺序串联。",
           "当天尽量不带大行李，Innova Reborn 坐感更好。",
@@ -530,10 +665,76 @@
         tone: "blue",
         summary: "乌布到沙努尔码头，再乘快艇上岛，蓝梦岛段单独管理。",
         chips: ["蓝梦岛", "码头", "快艇", "行李日"],
+        transfer: {
+          from: "乌布酒店",
+          to: "蓝梦岛酒店（待补）",
+          mode: "包车到沙努尔码头 + 快艇 + 岛上接送",
+          schedule: "酒店出发时间、船公司、船班、抵达时间待补"
+        },
         details: [
           "重点确认酒店出发时间、码头、船班和行李限制。",
           "带箱转场时，车辆空间比价格更重要。",
           "快艇前后预留缓冲，不压到最后一班。"
+        ]
+      },
+      {
+        date: "7/13",
+        week: "周一",
+        title: "蓝梦岛岛上游玩",
+        area: "lembongan",
+        tone: "blue",
+        summary: "蓝梦岛全天，具体海滩、浮潜或岛上路线待补。",
+        chips: ["蓝梦岛", "岛上", "待补"],
+        transfer: {
+          from: "蓝梦岛酒店",
+          to: "蓝梦岛酒店",
+          mode: "岛上接送 / 电瓶车 / 船方安排",
+          schedule: "活动集合和返回时间待补"
+        },
+        details: [
+          "这天先作为蓝梦岛完整游玩日保留。",
+          "如果安排浮潜或跳岛，需补船公司、集合点和出海时间。",
+          "晚上确认次日是否继续留岛，或为离岛做准备。"
+        ]
+      },
+      {
+        date: "7/14",
+        week: "周二",
+        title: "蓝梦岛机动日",
+        area: "lembongan",
+        tone: "blue",
+        summary: "保留为蓝梦岛第二个完整日，具体活动待补。",
+        chips: ["蓝梦岛", "机动", "待补"],
+        transfer: {
+          from: "蓝梦岛酒店",
+          to: "蓝梦岛酒店 / 离岛码头（待确认）",
+          mode: "岛上接送 / 快艇待确认",
+          schedule: "是否离岛、船班和接送时间待补"
+        },
+        details: [
+          "如果继续住蓝梦岛，这天安排岛上轻松活动。",
+          "如果这天离岛，需要补快艇船班、沙努尔接车和下一晚酒店。",
+          "这天是后续衔接科莫多前最需要补信息的一天。"
+        ]
+      },
+      {
+        date: "7/15",
+        week: "周三",
+        title: "转场科莫多",
+        area: "komodo",
+        tone: "gold",
+        summary: "从蓝梦岛/巴厘岛方向转到 Labuan Bajo，航班和时间待补。",
+        chips: ["科莫多", "转场", "待补航班"],
+        transfer: {
+          from: "蓝梦岛或巴厘岛酒店（待确认）",
+          to: "Labuan Bajo 酒店（待补）",
+          mode: "快艇/接送 + DPS-LBJ 国内航班 + 酒店接送",
+          schedule: "离岛船班、DPS-LBJ 航班号、起降时间待补"
+        },
+        details: [
+          "科莫多段通常需要飞到 Labuan Bajo，具体航班号和时间必须补齐。",
+          "如果从蓝梦岛出发，要把快艇到沙努尔、去机场、飞科莫多三段时间串起来。",
+          "抵达后不建议安排硬活动，优先确认潜店或次日集合点。"
         ]
       },
       {
@@ -544,6 +745,12 @@
         tone: "blue",
         summary: "潜点由潜店安排，其他人活动待定。",
         chips: ["科莫多", "潜水成员潜水", "其他人待定"],
+        transfer: {
+          from: "Labuan Bajo 酒店",
+          to: "潜店/码头集合点 / Labuan Bajo 酒店",
+          mode: "潜店接送 / 出海船",
+          schedule: "集合时间、出海时间、返程时间由潜店待补"
+        },
         details: [
           "潜水成员参加潜水，潜点和出海安排由潜店确认。",
           "其他人建议安排 Labuan Bajo 镇上轻松活动、酒店休整或日落。",
@@ -559,6 +766,12 @@
         summary: "连续潜水第二天，其他人继续机动安排。",
         chips: ["科莫多", "连续潜水", "安全间隔"],
         warning: true,
+        transfer: {
+          from: "Labuan Bajo 酒店",
+          to: "潜店/码头集合点 / Labuan Bajo 酒店",
+          mode: "潜店接送 / 出海船",
+          schedule: "集合时间、最后一潜结束时间待补"
+        },
         details: [
           "潜水成员继续潜水，具体潜点不在总行程里展开。",
           "记录最后一潜结束时间，用于管理 7/18 的强度和海拔风险。",
@@ -574,6 +787,12 @@
         summary: "6 景点一日游，不展开明细，按全员集合日管理。",
         chips: ["一日游", "6 景点", "全员集合"],
         warning: true,
+        transfer: {
+          from: "Labuan Bajo 酒店",
+          to: "6 景点一日游集合点 / Labuan Bajo 酒店",
+          mode: "一日游车辆/船只，按订单执行",
+          schedule: "接送时间、出海/返程时间待补"
+        },
         details: [
           "不在页面内写 6 景点明细，按订单实际安排执行。",
           "前一晚确认接送时间、集合点、船或车、餐食和取消规则。",
@@ -583,13 +802,28 @@
     ];
 
     const timeline = document.querySelector("#timeline");
+    const segmentSummary = document.querySelector("#segment-summary");
     const toneClass = { gold: "gold", blue: "blue", green: "" };
+
+    function renderSegmentSummary(filter = "all") {
+      const summary = segmentSummaries[filter] || segmentSummaries.all;
+      segmentSummary.innerHTML = `
+        <h2>${summary.title}</h2>
+        <p>${summary.note}</p>
+        <div class="route-grid">
+          <div class="route-item"><span>出发</span><b>${summary.from}</b></div>
+          <div class="route-item"><span>抵达</span><b>${summary.to}</b></div>
+          <div class="route-item"><span>交通方式</span><b>${summary.mode}</b></div>
+          <div class="route-item"><span>航班 / 船班 / 时间</span><b class="pending">${summary.schedule}</b></div>
+        </div>
+      `;
+    }
 
     function render(filter = "all") {
       timeline.innerHTML = "";
+      renderSegmentSummary(filter);
       const visibleDays = days.filter((day) => {
         if (filter === "all") return true;
-        if (filter === "warning") return day.warning;
         return day.area === filter;
       });
 
@@ -613,6 +847,12 @@
           <div class="day-body">
             <div class="chips">
               ${day.chips.map((chip) => `<span class="chip ${day.warning && chip.includes("安全") ? "warn" : ""}">${chip}</span>`).join("")}
+            </div>
+            <div class="transfer-box">
+              <div><b>出发：</b>${day.transfer.from}</div>
+              <div><b>抵达：</b>${day.transfer.to}</div>
+              <div><b>交通：</b>${day.transfer.mode}</div>
+              <div><b>班次/时间：</b><span class="pending">${day.transfer.schedule}</span></div>
             </div>
             <ul class="detail-list">
               ${day.details.map((item) => `<li>${item}</li>`).join("")}
