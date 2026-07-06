@@ -112,33 +112,6 @@
       border-color: var(--green);
     }
 
-    .quick-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin: 16px 0 12px;
-    }
-
-    .metric {
-      background: rgba(255, 255, 255, 0.82);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 12px;
-      box-shadow: 0 8px 22px rgba(18, 48, 45, 0.06);
-    }
-
-    .metric b {
-      display: block;
-      font-size: 18px;
-      margin-bottom: 4px;
-    }
-
-    .metric span {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.4;
-    }
-
     .section-title {
       margin: 24px 0 12px;
       font-size: 18px;
@@ -393,7 +366,6 @@
         font-size: 28px;
       }
 
-      .quick-grid,
       .panel-grid {
         grid-template-columns: 1fr;
       }
@@ -444,12 +416,6 @@
       </div>
     </nav>
 
-    <section class="quick-grid" aria-label="行程概览">
-      <div class="metric"><b>同行 5 人</b><span>按 同行 5 人管理车辆和转场。</span></div>
-      <div class="metric"><b>3 段</b><span>巴厘岛、蓝梦岛、科莫多分开查看。</span></div>
-      <div class="metric"><b>2 天潜水</b><span>7/16-7/17 潜水成员参加科莫多潜水。</span></div>
-    </section>
-
     <section class="view active" id="view-itinerary">
       <div class="section-title">
         <span>每日行程</span>
@@ -463,7 +429,7 @@
       <div class="panel-grid">
         <article class="info-panel">
           <h3>巴厘岛陆地包车</h3>
-          <p>同行 5 人加 2-3 个大箱，首选 Innova Reborn。同日带全部行李或长时间坐车，升到 HiAce 更稳。</p>
+          <p>满员带行李时首选 Innova Reborn；如果当天行李特别多或坐车很久，升到 HiAce 更稳。</p>
         </article>
         <article class="info-panel">
           <h3>蓝梦岛转场</h3>
@@ -475,7 +441,7 @@
         </article>
         <article class="info-panel">
           <h3>Avanza / Sienta</h3>
-          <p>适合短途和行李少的情况。同行 5 人加 3 个大箱时空间不如 Innova Reborn 稳妥。</p>
+          <p>适合短途或轻装移动。转场日不如 Innova Reborn 稳妥。</p>
         </article>
         <article class="info-panel">
           <h3>当天确认</h3>
@@ -487,16 +453,12 @@
     <section class="view" id="view-alerts">
       <div class="section-title"><span>重点提醒</span></div>
       <div class="notice">
-        潜水成员 7/16-7/17 连续潜水。7/18 一日游不展开景点明细，但需要避免过度赶路、强体力安排，以及潜水后太快进入高海拔环境。最终以潜店给出的安全间隔为准。
+        7/18 一日游不展开景点明细，但需要避免过度赶路、强体力安排，以及潜水后太快进入高海拔环境。最终以潜店给出的安全间隔为准。
       </div>
       <div class="panel-grid" style="margin-top: 12px;">
         <article class="info-panel">
           <h3>出海日</h3>
           <p>优先看天气、船况、救生设备、取消规则。行程前一晚确认集合点和早餐时间。</p>
-        </article>
-        <article class="info-panel">
-          <h3>行李日</h3>
-          <p>带大件行李转场时，不要只看座位数。要确认 同行 5 人和 2-3 个大箱能同时放下。</p>
         </article>
       </div>
     </section>
@@ -542,7 +504,7 @@
         chips: ["巴厘岛", "包车", "Innova Reborn"],
         details: [
           "海神庙 Tanah Lot 后转场乌布。",
-          "同行 5 人加大箱，优先 Innova Reborn；如当天带 3 个超大箱可看 HiAce。",
+          "满员带大件行李时，优先 Innova Reborn；如果行李特别多可看 HiAce。",
           "乌布路窄且容易堵，司机熟路比自驾更重要。"
         ]
       },
