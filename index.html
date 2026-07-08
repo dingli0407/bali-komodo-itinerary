@@ -548,7 +548,7 @@
         from: "杭州萧山 T4",
         to: "杭州萧山 T4",
         mode: "航班 + 接机 + 包车 + 快艇/岛上交通 + 科莫多出海",
-        schedule: "7/8 CZ3864/CZ625 去程；7/19 QZ645/SQ939/SQ838 返程；7/15 去科莫多交通待补"
+        schedule: "7/8 CZ3864/CZ625 去程；7/14 ID6335 飞科莫多；7/19 QZ645/SQ939/SQ838 返程"
       },
       bali: {
         title: "巴厘岛段",
@@ -560,19 +560,19 @@
       },
       lembongan: {
         title: "蓝梦岛段",
-        note: "蓝梦岛单独作为海岛段管理，重点是快艇船班、码头接送、岛上活动和离岛衔接。",
+        note: "蓝梦岛单独作为海岛段管理。7/14 提前离岛，回巴厘岛机场转飞科莫多。",
         from: "沙努尔码头",
-        to: "蓝梦岛酒店 / 离岛码头待补",
+        to: "蓝梦岛酒店 / 7/14 离岛码头",
         mode: "快艇 + 岛上接送",
-        schedule: "船公司、船班时间、酒店接送时间待补"
+        schedule: "7/14 回 Sanur 船班建议不晚于 12:30"
       },
       komodo: {
         title: "科莫多段",
-        note: "科莫多以 Labuan Bajo 为基地。酒店和返程航班已补入，7/15 抵达科莫多的具体交通仍待补。",
-        from: "蓝梦岛/巴厘岛方向（7/15 交通待补）",
+        note: "7/14 晚到 Labuan Bajo，先住 Sudamala；7/15 作为缓冲/换酒店日，后续潜水和一日游不再被转场压缩。",
+        from: "蓝梦岛 → Sanur → DPS",
         to: "杭州萧山 T4",
-        mode: "转场交通 + 科莫多出海 + QZ645/SQ939/SQ838 返程",
-        schedule: "7/15 转场待补；7/19 08:40-22:50 返程"
+        mode: "ID6335 + 科莫多接机 + 科莫多出海 + QZ645/SQ939/SQ838 返程",
+        schedule: "7/14 ID6335 16:45-18:00；18:30 接机；7/19 08:40-22:50 返程"
       }
     };
 
@@ -673,7 +673,7 @@
           schedule: "酒店出发时间、船公司、船班、抵达时间待补"
         },
         details: [
-          "酒店：Mahagiri Resort Nusa Lembongan，7/12 入住，7/15 离店。",
+          "酒店：Mahagiri Resort Nusa Lembongan，原订单 7/12 入住；7/14 提前离岛需确认退改或保留。",
           "重点确认酒店出发时间、码头、船班和行李限制。",
           "带箱转场时，车辆空间比价格更重要。",
           "快艇前后预留缓冲，不压到最后一班。"
@@ -696,47 +696,48 @@
         details: [
           "这天先作为蓝梦岛完整游玩日保留。",
           "如果安排浮潜或跳岛，需补船公司、集合点和出海时间。",
-          "晚上确认次日是否继续留岛，或为离岛做准备。"
+          "晚上确认 7/14 离岛船班、码头接送和去 DPS 机场的包车。"
         ]
       },
       {
         date: "7/14",
         week: "周二",
-        title: "蓝梦岛机动日",
-        area: "lembongan",
-        tone: "blue",
-        summary: "保留为蓝梦岛第二个完整日，具体活动待补。",
-        chips: ["蓝梦岛", "机动", "待补"],
+        title: "蓝梦岛离岛，飞科莫多",
+        area: "komodo",
+        tone: "gold",
+        summary: "从蓝梦岛回巴厘岛机场，乘 ID6335 飞 Labuan Bajo，晚入住 Sudamala。",
+        chips: ["转场", "ID6335", "Sudamala"],
         transfer: {
           from: "Mahagiri Resort Nusa Lembongan",
-          to: "Mahagiri Resort Nusa Lembongan / 离岛码头（待确认）",
-          mode: "岛上接送 / 快艇待确认",
-          schedule: "是否离岛、船班和接送时间待补"
+          to: "Sudamala Resort, Komodo, Labuan Bajo",
+          mode: "快艇回 Sanur + 包车到 DPS + Batik Air ID6335 + 7座小巴接机",
+          schedule: "蓝梦岛船班建议不晚于 12:30；ID6335 16:45 DPS → 18:00 LBJ；18:30 接机"
         },
         details: [
-          "如果继续住蓝梦岛，这天安排岛上轻松活动。",
-          "如果这天离岛，需要补快艇船班、沙努尔接车和下一晚酒店。",
-          "这天是后续衔接科莫多前最需要补信息的一天。"
+          "航班：印尼峇迪航空 ID6335，16:45 巴厘岛伍拉赖机场 D 出发，18:00 抵达下拉布安科莫多。",
+          "接机：18:30 用车，7座小巴，从科莫多机场到 Sudamala Resort, Komodo, Labuan Bajo。",
+          "酒店：Sudamala Resort, Komodo, Labuan Bajo，7/14 入住，7/15 离店。",
+          "当天不再安排额外游玩，重点是稳妥完成蓝梦岛到科莫多的长转场。"
         ]
       },
       {
         date: "7/15",
         week: "周三",
-        title: "转场科莫多，入住 Katamaran",
+        title: "科莫多缓冲，换酒店/轻量游",
         area: "komodo",
-        tone: "gold",
-        summary: "抵达下拉布安后入住 Katamaran Hotel & Resort Komodo。",
-        chips: ["科莫多", "转场待补", "Katamaran"],
+        tone: "green",
+        summary: "已经提前到科莫多，这天作为缓冲日，可安排半日轻量活动。",
+        chips: ["科莫多", "缓冲日", "轻量活动"],
         transfer: {
-          from: "蓝梦岛或巴厘岛方向（待确认）",
-          to: "Katamaran Hotel & Resort Komodo",
-          mode: "快艇/接送 + DPS-LBJ 国内航班 + 酒店接送",
-          schedule: "离岛船班、DPS-LBJ 航班号、起降时间待补"
+          from: "Sudamala Resort, Komodo, Labuan Bajo",
+          to: "Katamaran Hotel & Resort Komodo（如保留原订单）",
+          mode: "酒店换住 / 包车短途 / 半日游待确认",
+          schedule: "Sudamala 退房和下一晚酒店入住时间待确认"
         },
         details: [
-          "酒店：Katamaran Hotel & Resort Komodo，7/15 入住，7/19 离店。",
-          "录屏中已看到酒店订单，但 7/15 去 Labuan Bajo 的航班/船班细节还没看到。",
-          "抵达后不建议安排硬活动，优先确认潜店或次日集合点。"
+          "这天不再承担跨岛转场压力，优先确认 7/16-7/17 潜店安排和 7/18 一日游。",
+          "如保留原酒店订单，可从 Sudamala 换住 Katamaran Hotel & Resort Komodo。",
+          "适合安排 Batu Cermin、Rangko Cave、Sylvia Hill 或落日半日游，避免再报重复的主线海岛团。"
         ]
       },
       {
