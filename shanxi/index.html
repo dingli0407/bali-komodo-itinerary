@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>山西 20 日文化旅行｜2026.08.01–08.20</title>
+  <style>
+    :root {
+      --paper: #f4efe5;
+      --ink: #24231f;
+      --muted: #6b675e;
+      --red: #9a3f2f;
+      --red-soft: #f1ded6;
+      --green: #355b4b;
+      --green-soft: #dce8df;
+      --gold: #ad7a2d;
+      --blue: #315c73;
+      --white: #fffdfa;
+      --line: #d7cfc0;
+      --shadow: 0 14px 40px rgba(55, 44, 25, .10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 13% 0%, rgba(173,122,45,.12), transparent 28rem),
+        linear-gradient(180deg, #eee7d9 0, var(--paper) 22rem);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.68;
+    }
+    a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    button, input { font: inherit; }
+    .hero {
+      min-height: 500px;
+      color: var(--ink);
+      display: grid;
+      align-items: start;
+      position: relative;
+      overflow: hidden;
+      background: url("images/shanxi-route-map-v2.png") center / cover no-repeat #f7f3e9;
+    }
+    #routeCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+    .hero-inner { width: min(1120px, calc(100% - 36px)); margin: 0 auto; padding: 34px 0; position: relative; z-index: 2; }
+    .hero-title { display: inline-block; padding: 17px 21px 18px; border: 1px solid rgba(105,87,56,.18); border-radius: 18px; background: rgba(255,253,248,.88); box-shadow: 0 12px 34px rgba(81,65,38,.12); backdrop-filter: blur(8px); }
+    .eyebrow { letter-spacing: .11em; font-weight: 750; font-size: 12px; color: var(--red); }
+    h1 { font-family: Georgia, "Songti SC", "STSong", serif; font-size: clamp(31px, 4.2vw, 52px); line-height: 1.03; letter-spacing: -.045em; margin: 8px 0 0; max-width: 900px; }
+    .lede { font-size: clamp(17px, 2vw, 22px); max-width: 790px; color: #e6e7df; margin: 0; }
+    .pills { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 28px; }
+    .pill { padding: 8px 13px; border: 1px solid rgba(255,255,255,.27); border-radius: 999px; background: rgba(255,255,255,.08); font-size: 14px; }
+    nav { position: sticky; top: 0; z-index: 20; background: rgba(250,247,240,.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .nav-inner { width: min(1120px, calc(100% - 28px)); margin: 0 auto; display: flex; gap: 4px; overflow-x: auto; padding: 9px 0; }
+    nav a { text-decoration: none; color: var(--ink); font-weight: 720; font-size: 14px; padding: 9px 13px; border-radius: 999px; white-space: nowrap; }
+    nav a:hover { background: var(--green-soft); color: var(--green); }
+    main { width: min(1120px, calc(100% - 36px)); margin: 0 auto; padding: 58px 0 100px; }
+    section { scroll-margin-top: 78px; margin-bottom: 64px; }
+    .section-head { display: flex; gap: 20px; align-items: end; justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 25px; }
+    .section-head h2 { font: 800 clamp(28px, 4vw, 45px)/1.1 Georgia, "Songti SC", serif; margin: 0; letter-spacing: -.035em; }
+    .section-head p { margin: 0; color: var(--muted); max-width: 520px; text-align: right; }
+    .notice { border-radius: 18px; padding: 20px 22px; margin: 18px 0; display: grid; grid-template-columns: auto 1fr; gap: 13px; background: var(--red-soft); border: 1px solid #d8b4a8; }
+    .notice.ok { background: var(--green-soft); border-color: #b7cdbd; }
+    .notice .icon { font-size: 22px; line-height: 1.35; }
+    .notice strong { display: block; margin-bottom: 4px; }
+    .route-strip { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+    .route-stop { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 16px; min-height: 154px; box-shadow: 0 5px 18px rgba(55,44,25,.05); }
+    .route-stop .day { color: var(--red); font-weight: 850; font-size: 13px; letter-spacing: .08em; }
+    .route-stop h3 { font-size: 17px; line-height: 1.3; margin: 8px 0; }
+    .route-stop p { color: var(--muted); font-size: 13px; line-height: 1.5; margin: 0; }
+    .day-card { display: grid; grid-template-columns: 185px 1fr; gap: 0; background: var(--white); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; margin: 20px 0; box-shadow: var(--shadow); }
+    .day-aside { padding: 26px 23px; background: #eee5d4; border-right: 1px solid var(--line); }
+    .day-no { font: 900 52px/.9 Georgia, serif; color: var(--green); }
+    .day-aside h3 { font-size: 17px; line-height: 1.35; margin: 15px 0 8px; }
+    .day-aside p { margin: 0; color: var(--muted); font-size: 13px; }
+    .day-main { padding: 27px 30px 30px; }
+    .day-main > h3 { font: 800 27px/1.25 Georgia, "Songti SC", serif; margin: 0 0 16px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 17px; }
+    .tag { border-radius: 999px; background: #eee; padding: 5px 9px; font-size: 12px; font-weight: 700; }
+    .tag.hike { background: #e1ebe4; color: #2f6149; }
+    .tag.drive { background: #e1e9ed; color: #315c73; }
+    .tag.culture { background: #f0e3cf; color: #7a531d; }
+    .timeline { list-style: none; padding: 0; margin: 16px 0; }
+    .timeline li { display: grid; grid-template-columns: 74px 1fr; gap: 14px; padding: 11px 0; border-bottom: 1px dashed var(--line); }
+    .timeline time { font-weight: 820; color: var(--red); font-variant-numeric: tabular-nums; }
+    .timeline b { display: block; }
+    .timeline span { color: var(--muted); font-size: 14px; }
+    .focus { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
+    .focus > div { border-left: 3px solid var(--gold); padding: 5px 0 5px 14px; }
+    .focus strong { display: block; }
+    .focus small { color: var(--muted); font-size: 13px; }
+    .attraction-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .attraction-card { min-height: 230px; padding: 0; overflow: hidden; position: relative; border: 1px solid var(--line); border-radius: 18px; background: #253b31; color: white; cursor: pointer; text-align: left; box-shadow: var(--shadow); }
+    .attraction-card img { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: cover; transition: transform .25s ease; }
+    .attraction-card:hover img { transform: scale(1.035); }
+    .attraction-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,27,23,.04) 15%, rgba(18,27,23,.92) 100%); }
+    .attraction-card.image-missing { background: linear-gradient(145deg, #48695a, #263b32); }
+    .attraction-card-copy { position: absolute; z-index: 1; left: 16px; right: 16px; bottom: 15px; display: grid; gap: 4px; }
+    .attraction-card-copy small { color: #e5d5ae; font-weight: 800; }
+    .attraction-card-copy strong { font: 800 21px/1.15 Georgia, "Songti SC", serif; }
+    .attraction-card-copy em { font-style: normal; font-size: 12px; opacity: .82; }
+    .attraction-inline-tools { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
+    .attraction-inline { border: 1px solid #b9c8bf; background: #edf4ef; color: #315443; border-radius: 999px; padding: 3px 8px; cursor: pointer; font-size: 11px; font-weight: 800; }
+    .attraction-modal[hidden] { display: none; }
+    .attraction-modal { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; padding: 18px; }
+    .attraction-backdrop { position: absolute; inset: 0; border: 0; background: rgba(15,22,19,.72); backdrop-filter: blur(5px); cursor: pointer; }
+    .attraction-panel { position: relative; width: min(860px, 100%); max-height: min(88vh, 820px); overflow: auto; border-radius: 24px; background: var(--paper); box-shadow: 0 26px 90px rgba(0,0,0,.38); }
+    .attraction-close { position: absolute; z-index: 2; top: 13px; right: 13px; width: 42px; height: 42px; border: 0; border-radius: 50%; background: rgba(20,27,24,.82); color: white; font-size: 29px; line-height: 1; cursor: pointer; }
+    .attraction-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px; padding: 8px; background: #18251f; }
+    .attraction-photo-wrap { height: 300px; margin: 0; background: linear-gradient(145deg, #496a5b, #253b31); position: relative; overflow: hidden; }
+    .attraction-photo { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .attraction-photo-wrap figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 12px 9px; color: white; font-size: 12px; background: linear-gradient(transparent, rgba(10,16,13,.78)); }
+    .attraction-photo-fallback { display: none; position: absolute; inset: 0; place-items: center; color: white; }
+    .attraction-photo-wrap.image-missing .attraction-photo { display: none; }
+    .attraction-photo-wrap.image-missing .attraction-photo-fallback { display: grid; }
+    .attraction-modal-copy { padding: 27px 31px 32px; }
+    .attraction-meta { color: var(--red); font-weight: 850; font-size: 13px; }
+    .attraction-modal-copy h2 { margin: 5px 0 10px; font: 850 34px/1.15 Georgia, "Songti SC", serif; }
+    .attraction-modal-copy h3 { margin: 22px 0 8px; }
+    .attraction-modal-copy p, .attraction-modal-copy li { color: var(--muted); line-height: 1.7; }
+    .attraction-modal-copy ol { margin: 0; padding-left: 23px; }
+    .attraction-source { display: inline-block; margin-top: 18px; font-size: 12px; }
+    body.modal-open { overflow: hidden; }
+    .hotel-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .hotel { background: var(--white); border: 1px solid var(--line); border-radius: 18px; padding: 20px; }
+    .hotel-top { display: flex; align-items: start; justify-content: space-between; gap: 12px; }
+    .hotel h3 { margin: 0; font-size: 18px; }
+    .hotel .where { color: var(--red); font-weight: 780; font-size: 13px; }
+    .hotel p { color: var(--muted); font-size: 14px; }
+    .hotel ul { margin: 10px 0 0; padding-left: 20px; font-size: 14px; }
+    .choice { color: var(--green); background: var(--green-soft); border-radius: 999px; padding: 5px 9px; font-size: 12px; font-weight: 800; white-space: nowrap; }
+    .choice.alt { color: #76511e; background: #f2e6d2; }
+    .gate { background: #2e3e36; color: #f8f4eb; border-radius: 22px; padding: 26px; }
+    .gate h3 { font: 800 27px Georgia, serif; margin: 0 0 6px; }
+    .gate p { color: #d8dfd9; }
+    .checks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 20px; margin-top: 18px; }
+    .check { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.14); }
+    .check input { width: 19px; height: 19px; margin-top: 3px; accent-color: #d6b56c; }
+    .check label { cursor: pointer; }
+    .check label span { display: block; color: #bdc9c0; font-size: 13px; }
+    details { background: var(--white); border: 1px solid var(--line); border-radius: 15px; padding: 15px 18px; margin: 10px 0; }
+    summary { cursor: pointer; font-weight: 800; }
+    .sources { font-size: 14px; color: var(--muted); }
+    .sources li { margin: 8px 0; }
+    .master-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .master-day { position: relative; background: var(--white); border: 1px solid var(--line); border-radius: 17px; padding: 17px; min-height: 166px; }
+    .master-day.fixed { border-top: 4px solid var(--green); }
+    .master-day.pending { border-top: 4px solid #c5ad7b; background: #fbf7ee; }
+    .master-day.risk { border-top: 4px solid var(--red); }
+    .master-day .date { color: var(--red); font-size: 12px; font-weight: 850; letter-spacing: .04em; }
+    .master-day h3 { margin: 6px 0 7px; font-size: 16px; line-height: 1.35; }
+    .master-day p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .master-day .sleep { position: absolute; left: 17px; right: 17px; bottom: 13px; padding-top: 8px; border-top: 1px dashed var(--line); color: var(--green); font-weight: 780; font-size: 12px; }
+    .status-key { display: flex; flex-wrap: wrap; gap: 14px; color: var(--muted); font-size: 13px; margin: -10px 0 20px; }
+    .status-key i { width: 9px; height: 9px; display: inline-block; border-radius: 50%; margin-right: 5px; }
+    .ops-table { width: 100%; border-collapse: collapse; background: var(--white); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; display: table; }
+    .ops-table th, .ops-table td { padding: 13px 14px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; font-size: 14px; }
+    .ops-table th { background: #ece5d8; font-size: 12px; color: var(--muted); letter-spacing: .04em; }
+    .ops-table tr:last-child td { border-bottom: 0; }
+    .ops-table .locked { color: var(--green); font-weight: 800; }
+    .ops-table .todo { color: var(--red); font-weight: 800; }
+    .pace { display: block; color: var(--red); font-weight: 800; margin-bottom: 3px; }
+    .footer-tools { position: fixed; right: 18px; bottom: 18px; z-index: 30; display: flex; gap: 8px; }
+    .footer-tools button { border: 0; border-radius: 999px; padding: 11px 15px; color: white; background: var(--green); box-shadow: var(--shadow); cursor: pointer; font-weight: 780; }
+    @media (max-width: 900px) {
+      .route-strip { grid-template-columns: repeat(3, 1fr); }
+      .hotel-grid { grid-template-columns: 1fr; }
+      .attraction-grid { grid-template-columns: repeat(2, 1fr); }
+      .master-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 680px) {
+      .hero { min-height: 540px; background-position: 58% center; }
+      .hero-inner { padding: 18px 0; }
+      .hero-title { padding: 13px 16px 14px; border-radius: 15px; }
+      main { width: min(100% - 24px, 1120px); padding-top: 36px; }
+      .section-head { display: block; }
+      .section-head p { text-align: left; margin-top: 9px; }
+      .route-strip { display: flex; overflow-x: auto; padding-bottom: 7px; }
+      .route-stop { min-width: 180px; }
+      .day-card { grid-template-columns: 1fr; }
+      .day-aside { border-right: 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 80px 1fr; align-items: center; }
+      .day-aside h3 { margin: 0 0 4px; }
+      .day-main { padding: 23px 19px 26px; }
+      .focus, .checks { grid-template-columns: 1fr; }
+      .timeline li { grid-template-columns: 65px 1fr; }
+      .master-grid { grid-template-columns: 1fr; }
+      .attraction-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .attraction-card { min-height: 190px; }
+      .attraction-gallery { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; }
+      .attraction-photo-wrap { flex: 0 0 88%; height: 260px; scroll-snap-align: start; }
+      .attraction-modal { padding: 8px; }
+      .attraction-panel { max-height: 94vh; border-radius: 20px; }
+      .attraction-modal-copy { padding: 22px 20px 26px; }
+      .attraction-modal-copy h2 { font-size: 29px; }
+      .master-day { min-height: 145px; }
+      .ops-table { display: block; overflow-x: auto; white-space: nowrap; }
+    }
+    @media print {
+      nav, .footer-tools { display: none; }
+      body { background: white; }
+      .hero { min-height: 330px; }
+      .day-card, .hotel { break-inside: avoid; box-shadow: none; }
+      section { margin-bottom: 35px; }
+      a { color: inherit; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <canvas id="routeCanvas" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <div class="hero-title">
+        <div class="eyebrow">2026.08.01—08.20 · 全程自驾</div>
+        <h1>山西 20 日</h1>
+      </div>
+    </div>
+  </header>
+
+  <nav aria-label="页面导航">
+    <div class="nav-inner">
+      <a href="#anyang">安阳</a>
+      <a href="#hike">南太行</a>
+      <a href="#southeast">晋东南</a>
+      <a href="#taiyuan-wutai">太原·五台</a>
+      <a href="#datong">大同</a>
+      <a href="#south-shanxi">晋南</a>
+      <a href="#attractions">景点</a>
+      <a href="#hotels">住宿</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="anyang">
+      <div class="section-head"><h2>商文明与安阳</h2><p>D1–D2 · 8/1–8/2</p></div>
+      <table class="ops-table theme-table">
+        <thead><tr><th>日期</th><th>动线</th><th>安排</th><th>住宿</th></tr></thead>
+        <tbody>
+          <tr><td><b>D1 · 8/1</b></td><td>杭州 → 安阳</td><td>全程自驾到安阳。</td><td class="locked">安阳东苑酒店</td></tr>
+          <tr><td><b>D2 · 8/2</b></td><td>安阳整天</td><td>当天安排待定。</td><td class="locked">安阳东苑酒店</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="hike">
+      <div class="section-head"><h2>南太行徒步</h2><p>D3–D5 · 韩口—张沟—八里沟</p></div>
+      <table class="ops-table theme-table">
+        <thead><tr><th>日期</th><th>动线</th><th>安排</th><th>住宿</th></tr></thead>
+        <tbody>
+          <tr><td><b>D3 · 8/3</b></td><td>安阳 → 八里沟 / 上八里镇</td><td><span class="pace">时间宽裕</span>停车、放大行李、约 D4 去韩口起点的车。</td><td class="locked">八里沟云崖川舍民宿</td></tr>
+          <tr><td><b>D4 · 8/4</b></td><td>八里沟 / 上八里镇 → 韩口 → 张沟</td><td><span class="pace">建议早出发</span>韩口村 → 滴水寨 → 山顶栈道 → 窟窿山 → 十字岭 → 张沟梯 → 张沟村。</td><td class="locked">望景阁民宿</td></tr>
+          <tr><td><b>D5 · 8/5</b></td><td>张沟 → 八里沟 → 新乡</td><td><span class="pace">建议早出发</span>常见走法：张沟村 → 无灯隧道 → 西莲寺 → 八里沟；取车后开到新乡。</td><td class="locked">新乡国际会议中心雷迪森</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="southeast">
+      <div class="section-head"><h2>晋东南古建彩塑</h2><p>D6–D8 · 晋城、高平、长子、长治</p></div>
+      <table class="ops-table theme-table">
+        <thead><tr><th>日期</th><th>动线</th><th>景点</th><th>住宿</th></tr></thead>
+        <tbody>
+          <tr><td><b>D6 · 8/6</b></td><td>新乡 → 晋城</td><td><span class="pace">上午转场</span>下午：玉皇庙、青莲寺。</td><td class="locked">晋城凤漾易汤温泉酒店</td></tr>
+          <tr><td><b>D7 · 8/7</b></td><td>晋城 ↔ 高平</td><td><span class="pace">正常出发</span>开化寺、铁佛寺、崇明寺。</td><td class="locked">晋城凤漾易汤温泉酒店</td></tr>
+          <tr><td><b>D8 · 8/8</b></td><td>晋城 → 长子 → 长治</td><td><span class="pace">建议早出发</span>法兴寺、崇庆寺、观音堂。</td><td class="locked">长治融汇通君亭酒店</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="taiyuan-wutai">
+      <div class="section-head"><h2>太原与五台唐构</h2><p>D9–D12 · 博物馆、晋祠、南禅寺、佛光寺、台怀镇</p></div>
+      <table class="ops-table theme-table">
+        <thead><tr><th>日期</th><th>动线</th><th>重点</th><th>住宿</th></tr></thead>
+        <tbody>
+          <tr><td><b>D9 · 8/9</b></td><td>长治 → 太原</td><td><span class="pace">正常出发</span>下午山西博物院。</td><td class="locked">太原茂业 JW 万豪</td></tr>
+          <tr><td><b>D10 · 8/10</b></td><td>太原市内</td><td><span class="pace">时间宽裕</span>晋祠；天龙山石窟备选。</td><td class="locked">太原茂业 JW 万豪</td></tr>
+          <tr><td><b>D11 · 8/11</b></td><td>太原 → 五台山</td><td><span class="pace">建议早出发</span>南禅寺、佛光寺。</td><td class="locked">五台山万豪</td></tr>
+          <tr><td><b>D12 · 8/12</b></td><td>五台山台怀镇</td><td><span class="pace">整天游览</span>显通寺、塔院寺、菩萨顶。</td><td class="locked">五台山万豪</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="datong">
+      <div class="section-head"><h2>大同石窟与辽金古建</h2><p>D13–D15 · 应县、悬空寺、云冈、大同古城、朔州</p></div>
+      <table class="ops-table theme-table">
+        <thead><tr><th>日期</th><th>动线</th><th>重点</th><th>住宿</th></tr></thead>
+        <tbody>
+          <tr><td><b>D13 · 8/13</b></td><td>五台山 → 大同</td><td><span class="pace">建议早出发</span>应县木塔、悬空寺。</td><td class="locked">大同古城瑞丰楼酒店</td></tr>
+          <tr><td><b>D14 · 8/14</b></td><td>大同</td><td><span class="pace">时间宽裕</span>云冈石窟全天。</td><td class="locked">大同古城瑞丰楼酒店</td></tr>
+          <tr><td><b>D15 · 8/15</b></td><td>大同 → 朔州 → 雁门关 → 忻州</td><td><span class="pace">建议早出发</span>华严寺 / 善化寺、崇福寺、雁门关。</td><td class="todo">忻州待订</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="south-shanxi">
+      <div class="section-head"><h2>晋南壁画与河东遗产</h2><p>D16–D19 · 广胜寺、陶寺、壶口、运城、芮城</p></div>
+      <table class="ops-table theme-table">
+        <thead><tr><th>日期</th><th>动线</th><th>重点</th><th>住宿</th></tr></thead>
+        <tbody>
+          <tr><td><b>D16 · 8/16</b></td><td>忻州 → 临汾</td><td><span class="pace">建议早出发</span>广胜寺、陶寺遗址博物馆。</td><td class="todo">临汾待订</td></tr>
+          <tr><td><b>D17 · 8/17</b></td><td>临汾 → 运城</td><td><span class="pace">建议早出发</span>壶口瀑布、万荣飞云楼。</td><td class="todo">运城待订</td></tr>
+          <tr><td><b>D18 · 8/18</b></td><td>运城</td><td><span class="pace">时间宽裕</span>解州关帝庙、盐湖。</td><td class="todo">运城连住</td></tr>
+          <tr><td><b>D19 · 8/19</b></td><td>运城 → 郑州</td><td><span class="pace">建议早出发</span>永乐宫、广仁王庙。</td><td class="todo">郑州待订</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="return">
+      <div class="section-head"><h2>返程</h2><p>D20 · 郑州回杭州</p></div>
+      <table class="ops-table theme-table">
+        <thead><tr><th>日期</th><th>动线</th><th>重点</th><th>终点</th></tr></thead>
+        <tbody>
+          <tr><td><b>D20 · 8/20</b></td><td>郑州 → 杭州</td><td><span class="pace">返程日</span>全程自驾。</td><td class="locked">杭州</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="attractions">
+      <div class="section-head"><h2>沿途景点图鉴</h2><p>按行程顺序排列。点击照片打开简介、现场亮点和图片来源；每日动线里的绿色小按钮也可直接打开同一浮窗。</p></div>
+      <div id="attractionGrid" class="attraction-grid" aria-live="polite"></div>
+    </section>
+
+    <section id="hotels">
+      <div class="section-head"><h2>住宿</h2><p>照片中已确认的订单均标为已预订。</p></div>
+      <table class="ops-table">
+        <thead><tr><th>日期</th><th>城市</th><th>酒店</th><th>房型 / 晚数</th><th>状态</th></tr></thead>
+        <tbody>
+          <tr><td>8/1–8/3</td><td>安阳</td><td>安阳东苑酒店（万达广场店）</td><td>高级大床房 · 2 晚</td><td class="locked">已预订</td></tr>
+          <tr><td>8/3–8/4</td><td>辉县 / 八里沟</td><td>八里沟云崖川舍民宿</td><td>观山家庭房 · 1 晚</td><td class="locked">已预订</td></tr>
+          <tr><td>8/4–8/5</td><td>张沟</td><td>望景阁民宿</td><td>观景双床房 · 1 晚</td><td class="locked">已预订</td></tr>
+          <tr><td>8/5–8/6</td><td>新乡</td><td>新乡国际会议中心雷迪森酒店</td><td>豪华双床房 · 1 晚</td><td class="locked">已预订</td></tr>
+          <tr><td>8/6–8/8</td><td>晋城</td><td>晋城凤漾易汤温泉酒店</td><td>泡池家庭亲子汤屋 · 2 晚</td><td class="locked">已预订</td></tr>
+          <tr><td>8/8–8/9</td><td>长治</td><td>融汇通君亭酒店</td><td>豪华双床房 · 1 晚</td><td class="locked">已预订</td></tr>
+          <tr><td>8/9–8/11</td><td>太原</td><td>太原茂业 JW 万豪酒店</td><td>2 晚</td><td class="locked">已预订</td></tr>
+          <tr><td>8/11–8/13</td><td>五台山</td><td>五台山万豪酒店</td><td>2 晚</td><td class="locked">已预订</td></tr>
+          <tr><td>8/13–8/15</td><td>大同</td><td>大同古城瑞丰楼酒店</td><td>瑞轩高级大床房 · 2 晚</td><td class="locked">已预订</td></tr>
+          <tr><td>8/15–8/16</td><td>忻州</td><td>待定</td><td>1 晚</td><td class="todo">待订</td></tr>
+          <tr><td>8/16–8/17</td><td>临汾</td><td>待定</td><td>1 晚</td><td class="todo">待订</td></tr>
+          <tr><td>8/17–8/19</td><td>运城</td><td>待定</td><td>2 晚</td><td class="todo">待订</td></tr>
+          <tr><td>8/19–8/20</td><td>郑州</td><td>待定</td><td>1 晚</td><td class="todo">待订</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="sources">
+      <div class="section-head"><h2>资料说明</h2><p>开放和预约以出发前官方信息为准；照片来源见景点浮窗底部。</p></div>
+    </section>
+  </main>
+
+  <div id="attractionModal" class="attraction-modal" role="dialog" aria-modal="true" aria-labelledby="attractionTitle" hidden>
+    <button class="attraction-backdrop" type="button" data-modal-close aria-label="关闭景点简介"></button>
+    <article id="attractionPanel" class="attraction-panel"></article>
+  </div>
+  <div class="footer-tools"><button type="button" onclick="window.print()">打印 / 存 PDF</button></div>
+  <script>
+    (() => {
+      const canvas = document.getElementById("routeCanvas");
+      const hero = canvas.parentElement;
+      const points = [
+        { name: "安阳", x: 1120, y: 650, dx: 14, dy: -15 },
+        { name: "南太行", x: 1085, y: 706, dx: 15, dy: 23 },
+        { name: "晋城", x: 970, y: 690, dx: -56, dy: 24 },
+        { name: "长治", x: 1000, y: 570, dx: 14, dy: -14 },
+        { name: "太原", x: 895, y: 415, dx: -54, dy: 4 },
+        { name: "五台山", x: 1060, y: 315, dx: 15, dy: -13 },
+        { name: "大同", x: 905, y: 125, dx: 14, dy: -13 },
+        { name: "忻州", x: 920, y: 350, dx: -55, dy: -12 },
+        { name: "临汾", x: 770, y: 625, dx: -52, dy: -12 },
+        { name: "运城", x: 755, y: 820, dx: -52, dy: 22 },
+        { name: "郑州", x: 1180, y: 820, dx: 15, dy: 22 }
+      ];
+
+      function draw() {
+        const rect = hero.getBoundingClientRect();
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.round(rect.width * dpr);
+        canvas.height = Math.round(rect.height * dpr);
+        const ctx = canvas.getContext("2d");
+        ctx.scale(dpr, dpr);
+
+        const sourceW = 1680;
+        const sourceH = 945;
+        const scale = Math.max(rect.width / sourceW, rect.height / sourceH);
+        const positionX = rect.width <= 680 ? .58 : .5;
+        const offsetX = (rect.width - sourceW * scale) * positionX;
+        const offsetY = (rect.height - sourceH * scale) * .5;
+        const mapped = points.map((p) => ({
+          ...p,
+          px: offsetX + p.x * scale,
+          py: offsetY + p.y * scale
+        }));
+
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.beginPath();
+        mapped.forEach((p, index) => index ? ctx.lineTo(p.px, p.py) : ctx.moveTo(p.px, p.py));
+        ctx.strokeStyle = "rgba(255,253,248,.96)";
+        ctx.lineWidth = rect.width <= 680 ? 9 : 12;
+        ctx.stroke();
+        ctx.strokeStyle = "#b94d35";
+        ctx.lineWidth = rect.width <= 680 ? 4 : 5;
+        ctx.stroke();
+
+        const fontSize = rect.width <= 680 ? 13 : 15;
+        ctx.font = `800 ${fontSize}px -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif`;
+        ctx.textBaseline = "middle";
+        mapped.forEach((p, index) => {
+          ctx.beginPath();
+          ctx.arc(p.px, p.py, rect.width <= 680 ? 5.5 : 6.5, 0, Math.PI * 2);
+          ctx.fillStyle = "#fffdf8";
+          ctx.fill();
+          ctx.lineWidth = 3;
+          ctx.strokeStyle = index === 0 ? "#8f2f23" : "#b94d35";
+          ctx.stroke();
+
+          const textX = p.px + p.dx;
+          const textY = p.py + p.dy;
+          const metrics = ctx.measureText(p.name);
+          ctx.fillStyle = "rgba(255,253,248,.91)";
+          ctx.fillRect(textX - 5, textY - fontSize * .75, metrics.width + 10, fontSize * 1.5);
+          ctx.fillStyle = "#302d27";
+          ctx.fillText(p.name, textX, textY);
+        });
+      }
+
+      draw();
+      window.addEventListener("resize", draw, { passive: true });
+    })();
+  </script>
+  <script src="./attractions.js?v=2"></script>
+</body>
+</html>
